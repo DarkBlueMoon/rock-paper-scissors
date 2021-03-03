@@ -19,30 +19,16 @@
 
       function playRound(playerSelection, computerSelection) {
         let roundResult;
-        if (playerSelection === "rock") {
-          if (computerSelection === "scissors") {
-            roundResult = `You win! ${playerSelection} beats ${computerSelection}!`;
-          } else if (computerSelection === "paper") {
-            roundResult = `You lose! ${computerSelection} beats ${playerSelection}!`;
-          } else {
-            roundResult = "It's a draw!";
-          }
-        } else if (playerSelection === "paper") {
-          if (computerSelection === "rock") {
-            roundResult = `You win! ${playerSelection} beats ${computerSelection}!`;
-          } else if (computerSelection === "scissors") {
-            roundResult = `You lose! ${computerSelection} beats ${playerSelection}!`;
-          } else {
-            roundResult = "It's a draw!";
-          }
-        } else if (playerSelection === "scissors") {
-          if (computerSelection === "paper") {
-            roundResult = `You win! ${playerSelection} beats ${computerSelection}!`;
-          } else if (computerSelection === "rock") {
-            roundResult = `You lose! ${computerSelection} beats ${playerSelection}!`;
-          } else {
-            roundResult = "It's a draw!";
-          }
+        if (playerSelection === computerSelection) {
+          roundResult = "It's a draw!";
+        } else if (
+          (playerSelection === "rock" && computerSelection === "scissors") ||
+          (playerSelection === "paper" && computerSelection === "rock") ||
+          (playerSelection === "scissors" && computerSelection === "paper")
+        ) {
+          roundResult = `You win! ${playerSelection} beats ${computerSelection}!`;
+        } else {
+          roundResult = `You lose! ${computerSelection} beats ${playerSelection}!`;
         }
 
         return roundResult;
