@@ -8,13 +8,12 @@
   </head>
   <body>
     <script>
-      const gameOptions = ["Rock", "Paper", "Scissors"];
+      const gameOptions = ["rock", "paper", "scissors"];
+      const MAX_ROUNDS = 5;
 
       function computerPlay() {
         // Randomly return 'rock', 'paper', or 'scissors'.
-        return gameOptions[
-          Math.floor(Math.random() * gameOptions.length)
-        ].toLowerCase();
+        return gameOptions[Math.floor(Math.random() * gameOptions.length)];
       }
 
       function playRound(playerSelection, computerSelection) {
@@ -34,11 +33,18 @@
         return roundResult;
       }
 
-      const playerSelection = "rock";
-      const computerSelection = computerPlay();
-      console.log(playerSelection);
-      console.log(computerSelection);
-      console.log(playRound(playerSelection, computerSelection));
+      function game() {
+        const playerSelection = prompt(
+          "Please choose: Rock, Paper, or Scissors"
+        ).toLowerCase();
+        const computerSelection = computerPlay();
+
+        for (let i = 0; i < MAX_ROUNDS; i++) {
+          console.log(playRound(playerSelection, computerSelection));
+        }
+      }
+
+      game();
     </script>
   </body>
 </html>
