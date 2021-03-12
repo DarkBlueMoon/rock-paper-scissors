@@ -3,7 +3,11 @@ const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
 const scissorsBtn = document.querySelector("#scissors");
 const resultsDiv = document.querySelector("#results");
-const MAX_ROUNDS = 5;
+const p1Score = document.querySelector("#playerOne");
+const p2Score = document.querySelector("#playerTwo");
+const MAX_SCORE = 5;
+
+let playing = true;
 
 function computerPlay() {
   // Randomly return 'rock', 'paper', or 'scissors'.
@@ -12,6 +16,7 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
   let roundResult;
+
   if (playerSelection === computerSelection) {
     roundResult = "It's a draw!";
   } else if (
@@ -20,8 +25,10 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "scissors" && computerSelection === "paper")
   ) {
     roundResult = `You win! ${playerSelection} beats ${computerSelection}!`;
+    p1Score.textContent++;
   } else {
     roundResult = `You lose! ${computerSelection} beats ${playerSelection}!`;
+    p2Score.textContent++;
   }
 
   return roundResult;
@@ -34,23 +41,38 @@ function addResult(res) {
 }
 
 rockBtn.addEventListener("click", () => {
-  addResult(playRound("rock", computerPlay()));
+  if (playing) {
+    addResult(playRound("rock", computerPlay()));
+    checkScores();
+  }
 });
 paperBtn.addEventListener("click", () => {
-  addResult(playRound("paper", computerPlay()));
+  if (playing) {
+    addResult(playRound("paper", computerPlay()));
+    checkScores();
+  }
 });
 scissorsBtn.addEventListener("click", () => {
-  addResult(playRound("scissors", computerPlay()));
+  if (playing) {
+    addResult(playRound("scissors", computerPlay()));
+    checkScores();
+  }
 });
 
-// function game() {
-//   for (let i = 0; i < MAX_ROUNDS; i++) {
-//     const playerSelection = prompt(
-//       "Please choose: Rock, Paper, or Scissors"
-//     ).toLowerCase();
-//     const computerSelection = computerPlay();
-//     console.log(playRound(playerSelection, computerSelection));
-//   }
-// }
+function announceWinner(winner) {
+  // Set playing flag to false (disable button events until game is reset)
+  // Announce whether player 1 or player 2 won
 
-// game();
+  playing = false;
+  const p = document.createElement("p");
+  p.textContent = `The winner is ${winner}!`;
+  resultsDiv.appendChild(p);
+}
+
+function checkScores() {
+  if (parseInt(p1Score.textContent) === 5) {
+    announceWinner("Player");
+  } else if (parseInt(p2Score.textContent) === 5) {
+    announceWinner("CPU");
+  }
+}
