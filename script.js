@@ -1,16 +1,12 @@
 let playerScore = 0;
 let computerScore = 0;
 
-// Randomly return "rock", "paper", or "scissors"
 function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
   const randomNum = Math.floor(Math.random() * choices.length);
   return choices[randomNum];
 }
 
-// Rock > Scissors
-// Scissors > Paper
-// Paper > Rock
 function playRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
   if (playerSelection === computerSelection) {
@@ -28,7 +24,7 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function determineWinner() {
+function getWinner() {
   if (playerScore > computerScore) {
     return "Game Over! Player wins!";
   } else if (computerScore > playerScore) {
@@ -48,6 +44,6 @@ function game() {
     console.log(playRound(playerSelection, getComputerChoice()));
   }
 
-  console.log(determineWinner());
+  console.log(getWinner());
 }
 game();
