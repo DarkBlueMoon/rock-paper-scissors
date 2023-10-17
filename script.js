@@ -1,5 +1,6 @@
 let playerScore = 0;
 let computerScore = 0;
+const rpsChoicesDiv = document.querySelector("#rps-choices");
 
 function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
@@ -46,4 +47,21 @@ function game() {
 
   console.log(getWinner());
 }
-game();
+// game();
+
+
+rpsChoicesDiv.addEventListener("click", (e) => {
+  switch (e.target.id) {
+    case "rock":
+      console.log(playRound("rock", getComputerChoice()));
+      break;
+    case "paper":
+      console.log(playRound("paper", getComputerChoice()));
+      break;
+    case "scissors":
+      console.log(playRound("scissors", getComputerChoice()));
+      break;
+    default:
+      break;
+  }
+});
